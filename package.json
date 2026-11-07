@@ -1,0 +1,14 @@
+{
+  "name": "json-merge-studio",
+  "productName": "JSON Merge Studio",
+  "version": "1.0.0",
+  "description": "Minimalist Electron app to explore a workspace, view files and merge JSON arrays by key.",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "devDependencies": {
+    "electron": "^31.3.0"
+  },
+  "license": "MIT"
+}

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang='en' data-theme='dark'>
+<head>
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <meta http-equiv='Content-Security-Policy' content="default-src 'self'; script-src 'self' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:;">
+  <title>JSON Merge Studio</title>
+  <link rel='stylesheet' href='styles.css'>
+</head>
+<body>
+
+  <!-- Welcome view -->
+  <section id='welcome-view' class='view hidden'>
+    <div class='welcome-card'>
+      <h1>JSON Merge Studio</h1>
+      <p class='muted'>Choose a workspace folder to explore and merge JSON files.</p>
+      <button id='choose-workspace-btn' class='btn primary'>Choose workspace…</button>
+      <p id='welcome-error' class='small welcome-error'></p>
+      <div id='recent-block' class='hidden'>
+        <h2>Recent workspaces</h2>
+        <ul id='recent-list'></ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main view -->
+  <section id='main-view' class='view hidden'>
+    <header id='topbar'>
+      <div id='workspace-label' class='ellipsis'></div>
+      <div class='spacer'></div>
+      <button id='merge-btn' class='btn primary' disabled>Merge selected</button>
+      <button id='change-workspace-btn' class='btn'>Change workspace</button>
+      <button id='theme-btn' class='btn icon' title='Toggle theme'>☀</button>
+    </header>
+
+    <div id='content'>
+      <aside id='sidebar'>
+        <div id='sidebar-header'>
+          <span class='side-title'>EXPLORER</span>
+          <span id='selection-count' class='muted'>0/2</span>
+        </div>
+        <div id='tree' class='tree'></div>
+        <div id='tree-note' class='muted small hidden'></div>
+      </aside>
+
+      <main id='editor-area'>
+        <div id='tabs' class='hidden'></div>
+        <div id='editor-host'>
+          <div id='editor-empty'>
+            <p class='muted'>Double-click a file on the left to view it here.</p>
+            <p class='muted'>Check two .json files to merge them.</p>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <footer id='statusbar'>
+      <span id='status-msg'>Ready</span>
+    </footer>
+  </section>
+
+  <!-- Merge dialog -->
+  <div id='merge-modal' class='backdrop hidden'>
+    <div class='modal'>
+      <h2>Merge JSON files</h2>
+      <p class='muted small'>Pick which file is the main (old) one. The other file becomes the new one.</p>
+      <div id='merge-main-options' class='radio-list'></div>
+
+      <div class='field-row'>
+        <span class='field-label'>Main keys to compare</span>
+        <button id='merge-add-key-btn' class='btn mini' type='button'>+ Add key</button>
+      </div>
+      <div id='merge-keys-list' class='keys-list'></div>
+      <p class='muted small keys-help'>An object is replaced only when ALL key values match. Otherwise it is kept/added.</p>
+
+      <label class='checkbox-row'>
+        <input id='overwrite-check' type='checkbox'>
+        <span>Overwrite main file</span>
+      </label>
+      <p id='merge-hint' class='muted small'></p>
+
+      <div class='modal-actions'>
+        <button id='merge-cancel-btn' class='btn'>Cancel</button>
+        <button id='merge-run-btn' class='btn primary'>Merge</button>
+      </div>
+    </div>
+  </div>
+
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.9/ace.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.9/mode-json.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.9/theme-monokai.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.9/theme-chrome.js'></script>
+  <script src='renderer.js'></script>
+</body>
+</html>
